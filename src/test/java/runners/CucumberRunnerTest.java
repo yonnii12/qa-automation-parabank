@@ -18,5 +18,5 @@ import static io.cucumber.junit.platform.engine.Constants.FILTER_TAGS_PROPERTY_N
         value = "pretty, html:target/cucumber-report.html, json:target/cucumber.json"
 )
 @ConfigurationParameter(key = FILTER_TAGS_PROPERTY_NAME, value = "@ui or @api")
-public class CucumberTestRunner {
+public class CucumberRunnerTest {
 }
