@@ -1,6 +1,6 @@
 # QA Automation - ParaBank Framework
 
-Este proyecto es una solución de automatización de pruebas híbrida (Frontend + Backend) para el sitio demostrativo [ParaBank](https://parabank.parasoft.com/parabank). Implementa patrones de diseño avanzados como Page Object Model (POM), Screenplay (conceptos en la gestión de tareas) y BDD.
+Este proyecto es una solución de automatización de pruebas híbrida (Frontend + Backend) para el sitio demostrativo [ParaBank](https://parabank.parasoft.com/parabank). Implementa patrones de diseño avanzados como Page Object Model (POM) y BDD.
 
 ---
 
