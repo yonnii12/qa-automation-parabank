@@ -125,12 +125,12 @@ Para cumplir con la entrega de la colección de Postman, se utiliza Newman.
 
 Durante la ejecución podrías encontrar los siguientes comportamientos:
 
-2.  **Error "Strict Mode Violation":**
+1.  **Error "Strict Mode Violation":**
     *   *Síntoma:* Playwright falla diciendo que encontró múltiples elementos.
     *   *Causa:* Selectores CSS ambiguos.
     *   *Solución:* Se han refinado los selectores usando filtros de texto (ej. `.filter(hasText("Overview"))`) para asegurar unicidad.
 
-4.  **Error de versión de Java:**
+2.  **Error de versión de Java:**
     *   *Síntoma:* `Fatal error compiling: error: invalid target release: 22`.
     *   *Solución:* Asegúrate de tener JDK 17 instalado y configurado en tu variable de entorno `JAVA_HOME`.
 
