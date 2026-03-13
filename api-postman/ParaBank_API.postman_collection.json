@@ -1,0 +1,116 @@
+{
+	"info": {
+		"_postman_id": "7b8f9a2c-d123-4e5f-b678-9c0a1b2c3d4e",
+		"name": "ParaBank API Automation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Parsear respuesta JSON",
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Customer ID received\", function () {",
+							"    pm.expect(jsonData.id).to.not.be.undefined;",
+							"    pm.expect(jsonData.id).to.be.a('number');",
+							"});",
+							"",
+							"// Guardar en variable de entorno para el siguiente request",
+							"pm.environment.set(\"customerId\", jsonData.id);",
+							"console.log(\"Customer ID saved: \" + jsonData.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/login/{{username}}/{{password}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"login",
+						"{{username}}",
+						"{{password}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Accounts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"",
+							"// ParaBank a veces devuelve un array directo o un objeto envuelto",
+							"// Esta lógica maneja ambos casos",
+							"pm.test(\"Accounts list is valid\", function () {",
+							"    // Caso 1: Array directo de cuentas",
+							"    if (Array.isArray(jsonData)) {",
+							"        pm.expect(jsonData.length).to.be.above(0);",
+							"    } ",
+							"    // Caso 2: Objeto único o estructura diferente (fallback)",
+							"    else if (jsonData.id) {",
+							"        pm.expect(jsonData.id).to.not.be.undefined;",
+							"    }",
+							"    else {",
+							"       // Si es estructura compleja tipo { accounts: [...] }",
+							"       pm.expect(jsonData).to.not.be.empty;",
+							"    }",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/customers/{{customerId}}/accounts",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"customers",
+						"{{customerId}}",
+						"accounts"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
